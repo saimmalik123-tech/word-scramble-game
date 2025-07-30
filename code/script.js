@@ -17,6 +17,7 @@ const submitButton = mainVivDiv.querySelector('button.submit');
 const scoreParagraph = document.getElementById('score');
 
 const modal = document.querySelector('.modal');
+const modalContent = modal.querySelector('.modalCon');
 const modalText = modalContent.querySelector('h3');
 const restartButton = modalContent.querySelector('button.restart');
 
