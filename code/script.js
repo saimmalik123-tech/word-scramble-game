@@ -6,7 +6,6 @@ const words = [
     "button", "remote", "charger", "laptop", "bottle", "candle", "notebook", "calendar"
 ];
 
-
 const playGameDiv = document.querySelector('.playGame');
 const playGameButton = playGameDiv.querySelector('button');
 
@@ -18,7 +17,6 @@ const submitButton = mainVivDiv.querySelector('button.submit');
 const scoreParagraph = document.getElementById('score');
 
 const modal = document.querySelector('.modal');
-const modalContent = modal.querySelector('.modalCon');
 const modalText = modalContent.querySelector('h3');
 const restartButton = modalContent.querySelector('button.restart');
 
@@ -43,8 +41,8 @@ function inputCheck() {
 inputCheck();
 wordInput.addEventListener('input', inputCheck);
 
-// Submit guess
-submitButton.addEventListener('click', () => {
+// Submit guess function (extracted for reuse)
+function submitGuess() {
     const value = wordInput.value.trim().toLowerCase();
     if (value === currentWord) {
         score++;
@@ -64,6 +62,16 @@ submitButton.addEventListener('click', () => {
         modalText.innerText = 'You entered the wrong word!';
     }
     inputCheck();
+}
+
+// Submit button click
+submitButton.addEventListener('click', submitGuess);
+
+// Enter key press on input triggers submit
+wordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !submitButton.disabled) {
+        submitGuess();
+    }
 });
 
 // Skip to next word
